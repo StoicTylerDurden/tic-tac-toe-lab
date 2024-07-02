@@ -88,20 +88,23 @@ const updateMessage = ()=>{
 const handleClick = (event) => {
     const squareIndex = event.target.id;
 
-    placePiece(squareIndex)
-    checkForWinner()
-    checkForTie()
-    switchPlayerTurn()
-    render()
-
     if (board[squareIndex] === 'X' || board[squareIndex] === 'O') {
-        return ("The square is full")
+        messageEl.innerText = "The square is full my guy"
+        return
     }
 
     if (winner === true) {
         console.log("The game is over");
         return
     }
+
+    placePiece(squareIndex)
+    checkForWinner()
+    checkForTie()
+    switchPlayerTurn()
+    render()
+
+
 };
 
 
@@ -122,13 +125,16 @@ const checkForTie = ()=>{
 
     for(let i=0; i<board.length; i++) {
         if(checkForWinner()){
+            console.log("I'm not setting tie to anything just returning ");
             return;
         }
         else if(board[i] === ""){
             tie = false
+            console.log("checkForTie: I'm inside the elseif condition tie = false");
+            break
         }
         else{
-            console.log("I'm inside the else condition");
+            console.log("checkForTie: I'm inside the else condition tie = true");
             tie = true; 
         }
     }//for loop
